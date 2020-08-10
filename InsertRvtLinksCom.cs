@@ -15,6 +15,7 @@ public class InsertRvtLinksCom : IExternalCommand
 {
     public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
     {
+        //comment
         UIApplication rvtUIApp;
         //UIDocument rvtUIDoc;
         Application m_rvtApp;
@@ -44,6 +45,7 @@ public class InsertRvtLinksCom : IExternalCommand
             newDoc.Save();
             newDoc.Close();
         }
+        
         return Result.Succeeded;
     }
 }
