@@ -23,6 +23,8 @@ public class CreatePrjFilesCom : IExternalCommand
 
         DocumentFunc docFuc = new DocumentFunc();
 
+        string[,] excelData = ExcelFunc.ReadExcelFile(@"E:\RvtProjectConfigFile\RvrProjectConfigFile.xlsx", 2, 0);
+
         List<string> templateFileName = new List<string> { @"ADSK_ШаблонПроекта_ОВ_r2019_v1.0.1.rte", @"ADSK_ШаблонПроекта_ОВ_r2019_v1.0.1.rte" };
         List<string> templateDir = new List<string> { @"E:\Файлы проектов", @"E:\Файлы проектов" };
 

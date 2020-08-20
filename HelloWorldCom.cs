@@ -11,7 +11,7 @@ using Application = Autodesk.Revit.ApplicationServices.Application;
 using ReadFromExcel;
 
 [TransactionAttribute(TransactionMode.ReadOnly)]
-//[RegenerationAttribute(RegenerationOption.ReadOnly)]
+[RegenerationAttribute(RegenerationOption.Manual)]
 
 public class HelloWorldCom : IExternalCommand
 {

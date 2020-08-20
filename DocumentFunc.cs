@@ -15,6 +15,7 @@ public class DocumentFunc
 
         public void CreateNewProjectByTemplate(Application app, FileInfo templateFile, FileInfo projectFile)
         {
+            TaskDialog.Show("Create********", $"Workset********  is not unique");
             if (!templateFile.Exists) TaskDialog.Show("CreateNewProjectByTemplate ", templateFile.FullName + " does not exist in directory");
             else if (!projectFile.Directory.Exists) TaskDialog.Show("CreateNewProjectByTemplate ", projectFile.DirectoryName + " does not existy");
             else if (projectFile.Exists) TaskDialog.Show("CreateNewProjectByTemplate", $"{projectFile.Name} can not be created because it already exist in directory {projectFile.DirectoryName}");

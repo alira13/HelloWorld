@@ -57,6 +57,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExcelFunc.cs" />
     <Compile Include="ReadFromExcel.cs" />
     <Compile Include="InsertRvtLinksCom.cs" />
     <Compile Include="CreatePrjFilesCom.cs" />
