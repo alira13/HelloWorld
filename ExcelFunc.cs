@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO.Packaging;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;       //microsoft Excel 14 object in references-> COM tab
 
@@ -18,30 +19,30 @@ public class ExcelFunc
         }
     }
 
-
-    public static string[,] ReadExcelFile(string filePath, int startStringNum = 0, int startColNum = 0)
+    public static string[,] ReadExcelFile(string filePath, int sheetNumFrom1)
     {
+        //TODO: If excel has different number of columns for different strings?
         //Create COM Objects. Create a COM object for everything that is referenced
         Excel.Application xlApp = new Excel.Application();
         Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(filePath);
-        Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+        Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[sheetNumFrom1];
         Excel.Range xlRange = xlWorksheet.UsedRange;
 
         int rowCount = xlRange.Rows.Count;
         int colCount = xlRange.Columns.Count;
 
-        string[,] excelData = new string[rowCount - startStringNum, colCount - startColNum];
+        string[,] excelData = new string[rowCount, colCount];
 
         //iterate over the rows and columns and print to the console as it appears in the file
         //excel is not zero based!!
-        for (int i = 0; i <= rowCount - startStringNum; i++)
+        for (int i = 1; i <= rowCount; i++)
         {
-            for (int j = 0; j <= colCount - startColNum; j++)
+            for (int j = 1; j <= colCount; j++)
             {
                 //write the value to the console
-                if (xlRange.Cells[1 + i + startStringNum, 1 + j + startColNum] != null && xlRange.Cells[1 + i + startStringNum, 1 + j + startColNum].Value2 != null)
+                if (xlRange.Cells[i, j] != null && xlRange.Cells[i, j].Value2 != null)
                 {
-                    excelData[i, j] = xlRange.Cells[1 + i + startStringNum, 1 + j + startColNum].Value2.ToString();
+                    excelData[i-1, j-1] = xlRange.Cells[i, j].Value2.ToString();
                 }
             }
         }

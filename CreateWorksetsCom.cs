@@ -13,7 +13,7 @@ using System.Windows.Forms;
 [TransactionAttribute(TransactionMode.Manual)]
 [RegenerationAttribute(RegenerationOption.Manual)]
 
-public class InsertRvtLinksCom : IExternalCommand
+public class CreateWorksetsCom : IExternalCommand
 {
     public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
     {
@@ -30,7 +30,7 @@ public class InsertRvtLinksCom : IExternalCommand
 
         DocumentFunc docFuc = new DocumentFunc();
 
-        string[,] excelData = ExcelFunc.ReadExcelFile(@"E:\RvtProjectConfigFile\RvrProjectConfigFile.xlsx",2);
+        string[,] excelData = ExcelFunc.ReadExcelFile(@"E:\RvtProjectConfigFile\RvrProjectConfigFile.xlsx",3);
         int prjFileNameColumn = 0;
         FileInfo[] projectFiles = new FileInfo[excelData.GetLength(0)-2];
 
@@ -43,14 +43,14 @@ public class InsertRvtLinksCom : IExternalCommand
             {
                 projectFiles[i - 2] = new FileInfo((string)excelData.GetValue(i, 0));
                 newDoc = m_rvtApp.OpenDocumentFile(projectFiles[i - 2].FullName);
-                for (int j = prjFileNameColumn + 1; j < excelData.GetLength(1); j++)
-                {
-                    MessageBox.Show("Insert to file: "+(string)excelData.GetValue(i, 0)+" link:"+(string)excelData.GetValue(i, j));
-                    docFuc.CreateRevitLink(newDoc, (string)excelData.GetValue(i, j));
-                }
+                docFuc.EnableWorksharing(newDoc, (string)excelData.GetValue(i, 1), (string)excelData.GetValue(i, 2));
+                //for (int j = prjFileNameColumn + 1; j < excelData.GetLength(1); j++)
+                //{
+                //    MessageBox.Show("Create worksets in: "+(string)excelData.GetValue(i, 0)+" link:"+(string)excelData.GetValue(i, j));
+                //    docFuc.CreateWorksets(newDoc, null);
+                //}
             }
             finally {}
-
         }
 
         return Result.Succeeded;

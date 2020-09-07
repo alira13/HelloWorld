@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExcelFunc.cs" />
-    <Compile Include="ReadFromExcel.cs" />
+    <Compile Include="CreateWorksetsCom.cs" />
     <Compile Include="InsertRvtLinksCom.cs" />
     <Compile Include="CreatePrjFilesCom.cs" />
     <Compile Include="HelloElemCom.cs" />

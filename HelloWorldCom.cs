@@ -8,9 +8,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Application = Autodesk.Revit.ApplicationServices.Application;
-using ReadFromExcel;
 
-[TransactionAttribute(TransactionMode.ReadOnly)]
+[TransactionAttribute(TransactionMode.Manual)]
 [RegenerationAttribute(RegenerationOption.Manual)]
 
 public class HelloWorldCom : IExternalCommand
@@ -59,7 +58,7 @@ public class HelloWorldCom : IExternalCommand
         //newDoc.Close();
         */
 
-        string[][] exData = ExcelData.getExcelFile(@"D:\OneDrive\RvtProjectConfigFile\RvrProjectConfigFile.xlsx");
+        //string[][] exData = ExcelData.getExcelFile(@"D:\OneDrive\RvtProjectConfigFile\RvrProjectConfigFile.xlsx");
 
         return Result.Succeeded;
     }

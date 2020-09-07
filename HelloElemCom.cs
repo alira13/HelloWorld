@@ -9,8 +9,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
+
 namespace HelloElemCom
+
 {
+    [TransactionAttribute(TransactionMode.Manual)]
+    [RegenerationAttribute(RegenerationOption.Manual)]
+
     class HelloElemCom : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
