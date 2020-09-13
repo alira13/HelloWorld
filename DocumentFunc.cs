@@ -10,21 +10,25 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Application = Autodesk.Revit.ApplicationServices.Application;
+using System;
+
 
 public class DocumentFunc
 {
+    public Action<string, string> userMessagefunc { get; set;}
+
     public void CreateNewProjectByTemplate(Application app, FileInfo templateFile, FileInfo projectFile)
     {
-        if (!templateFile.Exists) TaskDialog.Show("CreateNewProjectByTemplate ", templateFile.FullName + " does not exist in directory");
-        else if (!projectFile.Directory.Exists) TaskDialog.Show("CreateNewProjectByTemplate ", projectFile.DirectoryName + " does not exist");
-        else if (projectFile.Exists) TaskDialog.Show("CreateNewProjectByTemplate", $"{projectFile.Name} can not be created because it already exist in directory {projectFile.DirectoryName}");
+        if (!templateFile.Exists) userMessagefunc("CreateNewProjectByTemplate ", templateFile.FullName + " does not exist in directory");
+        else if (!projectFile.Directory.Exists) userMessagefunc("CreateNewProjectByTemplate ", projectFile.DirectoryName + " does not exist");
+        else if (projectFile.Exists) userMessagefunc("CreateNewProjectByTemplate", $"{projectFile.Name} can not be created because it already exist in directory {projectFile.DirectoryName}");
         else
         {
             Document doc = null;
             doc = app.NewProjectDocument(templateFile.FullName);
             doc.SaveAs(projectFile.FullName);
             doc.Close();
-            if (projectFile.Exists) TaskDialog.Show("CreateNewProjectByTemplate", projectFile.Name + " is succesfully created");
+            if (projectFile.Exists && userMessagefunc != null) userMessagefunc("CreateNewProjectByTemplate", projectFile.Name + " is succesfully created");
         }
     }
 
@@ -66,7 +70,7 @@ public class DocumentFunc
             doc.SaveAs(doc.PathName, options);
             doc.Close();
         }
-       else TaskDialog.Show("EnableWorksharing", "Worksharing is already enable in this file");
+       else userMessagefunc("EnableWorksharing", "Worksharing is already enable in this file");
     }
     
     public void CreateWorksets(Document doc, string[] WorksetNameArray)
@@ -88,7 +92,7 @@ public class DocumentFunc
             }
             else
             {
-                TaskDialog.Show("CreateWorksets", $"Workset name {worksetName} is not unique");
+                userMessagefunc("CreateWorksets", $"Workset name {worksetName} is not unique");
             }
         }
         doc.Save();
