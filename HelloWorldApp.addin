@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Hello World App</Name>
+    <FullClassName>HelloWorldApp</FullClassName>
+    <Assembly>D:\Path to HelloWorld.dll\HelloWorld\bin\Debug\HelloWorld.dll</Assembly>
+    <AddInId>49E64932-F4DA-4053-B795-3B4B7AE5C13C </AddInId>
+    <VendorId>ADNP</VendorId>
+    <VendorDescription>Autodesk, Inc. www.autodesk.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>
