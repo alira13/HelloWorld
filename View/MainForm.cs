@@ -71,5 +71,20 @@ namespace HelloWorld
         {
 
         }
+
+        private void butSelectFile_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void butOpenFile_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void butSaveFile_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

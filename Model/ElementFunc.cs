@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
-namespace ElementFunc
+namespace HelloWorld.ElementFuncNamespace
 {
     class ElementFunc
     {

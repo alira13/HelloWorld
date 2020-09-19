@@ -2,7 +2,7 @@
 using System.Text;
 using System.IO;
 
-namespace HelloWorld
+namespace HelloWorld.FileManagerNamespace
 {
     public class FileManager
     {

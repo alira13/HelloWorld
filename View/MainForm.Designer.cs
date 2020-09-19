@@ -41,62 +41,64 @@
             this.lblSelectFilePath.AutoSize = true;
             this.lblSelectFilePath.Location = new System.Drawing.Point(12, 16);
             this.lblSelectFilePath.Name = "lblSelectFilePath";
-            this.lblSelectFilePath.Size = new System.Drawing.Size(113, 17);
+            this.lblSelectFilePath.Size = new System.Drawing.Size(117, 17);
             this.lblSelectFilePath.TabIndex = 0;
-            this.lblSelectFilePath.Text = "Выберете файл";
-            //this.lblSelectFilePath.Click += new System.EventHandler(this.lblOpenFile_Click);
+            this.lblSelectFilePath.Text = "Выберете файл:";
             // 
             // fldFilePath
             // 
-            this.fldFilePath.Location = new System.Drawing.Point(131, 13);
+            this.fldFilePath.Location = new System.Drawing.Point(128, 16);
             this.fldFilePath.Name = "fldFilePath";
-            this.fldFilePath.Size = new System.Drawing.Size(451, 22);
+            this.fldFilePath.Size = new System.Drawing.Size(487, 22);
             this.fldFilePath.TabIndex = 1;
             // 
             // butSelectFile
             // 
             this.butSelectFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.butSelectFile.Location = new System.Drawing.Point(595, 12);
+            this.butSelectFile.Location = new System.Drawing.Point(621, 13);
             this.butSelectFile.Name = "butSelectFile";
-            this.butSelectFile.Size = new System.Drawing.Size(75, 39);
+            this.butSelectFile.Size = new System.Drawing.Size(75, 28);
             this.butSelectFile.TabIndex = 2;
             this.butSelectFile.Text = "Выбрать";
             this.butSelectFile.UseVisualStyleBackColor = true;
+            this.butSelectFile.Click += new System.EventHandler(this.butSelectFile_Click_1);
             // 
             // butOpenFile
             // 
             this.butOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.butOpenFile.Location = new System.Drawing.Point(676, 12);
+            this.butOpenFile.Location = new System.Drawing.Point(711, 13);
             this.butOpenFile.Name = "butOpenFile";
-            this.butOpenFile.Size = new System.Drawing.Size(77, 39);
+            this.butOpenFile.Size = new System.Drawing.Size(77, 28);
             this.butOpenFile.TabIndex = 3;
             this.butOpenFile.Text = "Открыть";
             this.butOpenFile.UseVisualStyleBackColor = true;
+            this.butOpenFile.Click += new System.EventHandler(this.butOpenFile_Click_1);
             // 
             // fldContent
             // 
             this.fldContent.AccessibleRole = System.Windows.Forms.AccessibleRole.ScrollBar;
-            this.fldContent.Location = new System.Drawing.Point(15, 70);
+            this.fldContent.Location = new System.Drawing.Point(15, 60);
             this.fldContent.Multiline = true;
             this.fldContent.Name = "fldContent";
-            this.fldContent.Size = new System.Drawing.Size(740, 353);
+            this.fldContent.Size = new System.Drawing.Size(773, 389);
             this.fldContent.TabIndex = 4;
             // 
             // butSaveFile
             // 
             this.butSaveFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butSaveFile.Location = new System.Drawing.Point(652, 429);
+            this.butSaveFile.Location = new System.Drawing.Point(685, 466);
             this.butSaveFile.Name = "butSaveFile";
-            this.butSaveFile.Size = new System.Drawing.Size(103, 49);
+            this.butSaveFile.Size = new System.Drawing.Size(103, 28);
             this.butSaveFile.TabIndex = 5;
-            this.butSaveFile.Text = "Cохранить";
+            this.butSaveFile.Text = "Сохранить";
             this.butSaveFile.UseVisualStyleBackColor = true;
+            this.butSaveFile.Click += new System.EventHandler(this.butSaveFile_Click_1);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 490);
+            this.ClientSize = new System.Drawing.Size(800, 506);
             this.Controls.Add(this.butSaveFile);
             this.Controls.Add(this.fldContent);
             this.Controls.Add(this.butOpenFile);
@@ -104,7 +106,7 @@
             this.Controls.Add(this.fldFilePath);
             this.Controls.Add(this.lblSelectFilePath);
             this.Name = "MainForm";
-            this.Text = "Выбор конфигрурационного файа";
+            this.Text = "Выбор конфигрурационного файла";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
