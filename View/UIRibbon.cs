@@ -10,6 +10,8 @@ using ComboBox = Autodesk.Revit.UI.ComboBox;
 
 namespace HelloWorld.View
 {
+    // TODO fix ButtonAvailability error for Ribbon
+
     [Transaction(TransactionMode.Manual)]
     [Regeneration(RegenerationOption.Manual)]
 
@@ -77,7 +79,6 @@ namespace HelloWorld.View
             return new BitmapImage(new Uri(Path.Combine(imageFolder, imageName)));
         }
 
-
         public void AddPushButtons(RibbonPanel panel)
         {
             // Set the information about the command we will be assigning to the button 
@@ -115,7 +116,6 @@ namespace HelloWorld.View
             pushButtonCreateWorksets.AvailabilityClassName = "ButtonAvailability";
             */
         }
-
 
         public void AddSplitButton(RibbonPanel panel)
         {

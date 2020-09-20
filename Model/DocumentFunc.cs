@@ -6,6 +6,7 @@ using System;
 
 namespace HelloWorld.Model
 {
+    // TODO understand why try-catch-finaly for class Document does not work
     public static class DocumentFunc
     {
         public static Action<string> userMessagefunc { get; set; }

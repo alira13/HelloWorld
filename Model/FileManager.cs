@@ -2,7 +2,7 @@
 using System.Text;
 using System.IO;
 
-//TODO delete this code
+//TODO call ReadFromExcel from GetContent and return FileInfo classes ProjectFileName TemplateFileName
 
 namespace HelloWorld.Model
 {
