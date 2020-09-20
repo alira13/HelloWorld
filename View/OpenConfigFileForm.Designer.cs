@@ -1,6 +1,6 @@
-﻿namespace HelloWorld
+﻿namespace HelloWorld.View
 {
-    partial class MainForm
+    partial class OpenConfigFileForm
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,6 @@
             this.fldFilePath = new System.Windows.Forms.TextBox();
             this.butSelectFile = new System.Windows.Forms.Button();
             this.butOpenFile = new System.Windows.Forms.Button();
-            this.fldContent = new System.Windows.Forms.TextBox();
             this.butSaveFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -41,9 +40,9 @@
             this.lblSelectFilePath.AutoSize = true;
             this.lblSelectFilePath.Location = new System.Drawing.Point(12, 16);
             this.lblSelectFilePath.Name = "lblSelectFilePath";
-            this.lblSelectFilePath.Size = new System.Drawing.Size(117, 17);
+            this.lblSelectFilePath.Size = new System.Drawing.Size(113, 17);
             this.lblSelectFilePath.TabIndex = 0;
-            this.lblSelectFilePath.Text = "Выберете файл:";
+            this.lblSelectFilePath.Text = "Выберете файл";
             // 
             // fldFilePath
             // 
@@ -61,7 +60,7 @@
             this.butSelectFile.TabIndex = 2;
             this.butSelectFile.Text = "Выбрать";
             this.butSelectFile.UseVisualStyleBackColor = true;
-            this.butSelectFile.Click += new System.EventHandler(this.butSelectFile_Click_1);
+            this.butSelectFile.Click += new System.EventHandler(this.butSelectFile_Click);
             // 
             // butOpenFile
             // 
@@ -72,42 +71,32 @@
             this.butOpenFile.TabIndex = 3;
             this.butOpenFile.Text = "Открыть";
             this.butOpenFile.UseVisualStyleBackColor = true;
-            this.butOpenFile.Click += new System.EventHandler(this.butOpenFile_Click_1);
-            // 
-            // fldContent
-            // 
-            this.fldContent.AccessibleRole = System.Windows.Forms.AccessibleRole.ScrollBar;
-            this.fldContent.Location = new System.Drawing.Point(15, 60);
-            this.fldContent.Multiline = true;
-            this.fldContent.Name = "fldContent";
-            this.fldContent.Size = new System.Drawing.Size(773, 389);
-            this.fldContent.TabIndex = 4;
+            this.butOpenFile.Click += new System.EventHandler(this.butOpenFile_Click);
             // 
             // butSaveFile
             // 
             this.butSaveFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.butSaveFile.Location = new System.Drawing.Point(685, 466);
+            this.butSaveFile.Location = new System.Drawing.Point(685, 57);
             this.butSaveFile.Name = "butSaveFile";
             this.butSaveFile.Size = new System.Drawing.Size(103, 28);
             this.butSaveFile.TabIndex = 5;
             this.butSaveFile.Text = "Сохранить";
             this.butSaveFile.UseVisualStyleBackColor = true;
-            this.butSaveFile.Click += new System.EventHandler(this.butSaveFile_Click_1);
+            this.butSaveFile.Click += new System.EventHandler(this.butSaveFile_Click);
             // 
-            // MainForm
+            // OpenConfigFileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 506);
+            this.ClientSize = new System.Drawing.Size(800, 97);
             this.Controls.Add(this.butSaveFile);
-            this.Controls.Add(this.fldContent);
             this.Controls.Add(this.butOpenFile);
             this.Controls.Add(this.butSelectFile);
             this.Controls.Add(this.fldFilePath);
             this.Controls.Add(this.lblSelectFilePath);
-            this.Name = "MainForm";
+            this.Name = "OpenConfigFileForm";
             this.Text = "Выбор конфигрурационного файла";
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Load += new System.EventHandler(this.OpenConfigFileForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,7 +108,6 @@
         private System.Windows.Forms.TextBox fldFilePath;
         private System.Windows.Forms.Button butSelectFile;
         private System.Windows.Forms.Button butOpenFile;
-        private System.Windows.Forms.TextBox fldContent;
         private System.Windows.Forms.Button butSaveFile;
     }
 }

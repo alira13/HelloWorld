@@ -63,17 +63,18 @@
     <Compile Include="Model\FileManager.cs" />
     <Compile Include="Model\ExcelFunc.cs" />
     <Compile Include="CreateWorksetsCom.cs" />
-    <Compile Include="View\MainForm.cs">
+    <Compile Include="View\UserMessageFunc.cs" />
+    <Compile Include="View\OpenConfigFileForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="View\OpenConfigFileForm.Designer.cs">
+      <DependentUpon>OpenConfigFileForm.cs</DependentUpon>
     </Compile>
     <Compile Include="InsertRvtLinksCom.cs" />
     <Compile Include="CreatePrjFilesCom.cs" />
     <Compile Include="Model\DocumentFunc.cs" />
     <Compile Include="Model\ElementFunc.cs" />
-    <Compile Include="HelloWorldApp.cs" />
+    <Compile Include="View\UIRibbon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,8 +84,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="View\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="View\OpenConfigFileForm.resx">
+      <DependentUpon>OpenConfigFileForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -92,7 +93,7 @@
     <Folder Include="Presenter\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="README.txt" />
+    <None Include="README.MD" />
     <Content Include="HelloWorldApp.addin" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;       //microsoft Excel 14 object in references-> COM tab
 
 
-namespace HelloWorld.ExcelFuncNamespace
+namespace HelloWorld.Model
 {
     public static class ExcelFunc
     {
@@ -15,7 +15,7 @@ namespace HelloWorld.ExcelFuncNamespace
                 for (int j = 0; j < excelData.GetLength(1); j++)
                 {
                     //new line
-                    if (j == 0 && i != 0) Console.Write("\r\n");
+                    if (j == 0 && i != 0) Console.Write("\n\n");
                     Console.Write(excelData[i, j] + "\t");
                 }
             }

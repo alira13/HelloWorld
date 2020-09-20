@@ -2,27 +2,27 @@
 using System.Text;
 using System.IO;
 
-namespace HelloWorld.FileManagerNamespace
+//TODO delete this code
+
+namespace HelloWorld.Model
 {
     public class FileManager
     {
-        private readonly Encoding _defaultEncoding = Encoding.GetEncoding(1251);
+        private static readonly Encoding defaultEncoding = Encoding.GetEncoding(1251);
 
-        public bool IsExist(string filePath)
+        public static bool IsExist(string filePath)
         {
-            if (File.Exists(filePath)) return true;
-            else return false;
+            return File.Exists(filePath);
         }
 
         public string GetContent(string filePath, Encoding encoding)
         {
-            string content = File.ReadAllText(filePath, encoding);
-            return content;
+            return File.ReadAllText(filePath, encoding);
         }
 
         public string GetContent(string FilePath)
         {
-            return GetContent(FilePath, _defaultEncoding);
+            return GetContent(FilePath, defaultEncoding);
         }
 
         public void SaveContent(string content, string filePath, Encoding encoding)
@@ -32,7 +32,7 @@ namespace HelloWorld.FileManagerNamespace
 
         public void SaveContent(string content, string filePath)
         {
-            SaveContent(filePath, content, _defaultEncoding);
+            SaveContent(filePath, content, defaultEncoding);
         }
     }
 }

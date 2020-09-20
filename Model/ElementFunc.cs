@@ -1,17 +1,12 @@
-﻿using Autodesk.Revit.ApplicationServices;
-using Autodesk.Revit.Attributes;
-using Autodesk.Revit.DB;
-using Autodesk.Revit.DB.Events;
+﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows.Forms;
 
-namespace HelloWorld.ElementFuncNamespace
+namespace HelloWorld.Model
 {
-    class ElementFunc
+    public static class ElementFunc
     {
         // Helper Function: parse the geometry element by geometry type. Here we look at the top level. 
         public static string GeometryElementToString(GeometryElement geomElem)
@@ -69,7 +64,7 @@ namespace HelloWorld.ElementFuncNamespace
         //  example of retrieving a specific parameter indivisually. 
         //  (hard coding for simplicity. This function works best 
         //  with walls and doors.)
-        public void RetrieveParameter(Element elem, string header)
+        public static void RetrieveParameter(Element elem, string header)
         {
             string s = string.Empty;
             // as an experiment, let's pick up some arbitrary parameters. 
@@ -120,7 +115,7 @@ namespace HelloWorld.ElementFuncNamespace
             TaskDialog.Show(header, s);
         }
 
-        public void ShowBasicElementInfo(Document m_rvtDoc, Element elem)
+        public static void ShowBasicElementInfo(Document m_rvtDoc, Element elem)
         {
             // let's see what kind of element we got. 
             // 
@@ -160,7 +155,7 @@ namespace HelloWorld.ElementFuncNamespace
             return elements;
         }
 
-        public void SetWorksetToElem(Document doc, string worksetName, Element[] elemArray)
+        public static void SetWorksetToElem(Document doc, string worksetName, Element[] elemArray)
         {
             if (elemArray == null) return;
 
@@ -186,13 +181,13 @@ namespace HelloWorld.ElementFuncNamespace
             }
         }
 
-        public Element PickElement(UIDocument rvtUIDoc)
+        public static Element PickElement(UIDocument rvtUIDoc)
         {
             Reference refPick = rvtUIDoc.Selection.PickObject(ObjectType.Element, "Pick an element");
             return rvtUIDoc.Document.GetElement(refPick);
         }
 
-        public void ShowParameters(Element elem, string header)
+        public static void ShowParameters(Element elem, string header)
         {
             IList<Parameter> paramSet = elem.GetOrderedParameters();
             string s = string.Empty;
@@ -205,7 +200,7 @@ namespace HelloWorld.ElementFuncNamespace
             TaskDialog.Show(header, s);
         }
 
-        public void PrintElemInfo(Element[] elem)
+        public static void PrintElemInfo(Element[] elem)
         {
             foreach (Element el in elem)
             {
@@ -214,7 +209,7 @@ namespace HelloWorld.ElementFuncNamespace
             }
         }
 
-        public void IdentifyElem(Element el)
+        public static void IdentifyElem(Element el)
         {
             string s = "";
             if (el is Wall) s = "Wall";
@@ -226,19 +221,19 @@ namespace HelloWorld.ElementFuncNamespace
         }
 
         //Filter System Family Types by type
-        public void FilterSystemFamByType(Document m_rvtDoc)
+        public static void FilterSystemFamByType(Document m_rvtDoc)
         {
             var wallTypeCollector1 = new FilteredElementCollector(m_rvtDoc).WherePasses(new ElementClassFilter(typeof(WallType)));
             IList<Element> wallTypes1 = wallTypeCollector1.ToElements();
         }
 
         //Filter System Family Types by Class
-        public void FilterSystemFamByClass(Document m_rvtDoc)
+        public static void FilterSystemFamByClass(Document m_rvtDoc)
         {
             FilteredElementCollector wallTypeCollector3 = new FilteredElementCollector(m_rvtDoc).OfClass(typeof(WallType));
         }
 
-        public void FilterLoadedFamByCat(Document m_rvtDoc)
+        public static void FilterLoadedFamByCat(Document m_rvtDoc)
         {
             var doorTypeCollector = new FilteredElementCollector(m_rvtDoc);
             doorTypeCollector.OfClass(typeof(FamilySymbol));
@@ -247,7 +242,7 @@ namespace HelloWorld.ElementFuncNamespace
         }
 
         // show the location information of the given element. location can be LocationPoint (e.g., furniture), and LocationCurve (e.g., wall).
-        public void ShowLocation(Element elem)
+        public static void ShowLocation(Element elem)
         {
             string s = "Location Information: " + "\n" + "\n";
             Location loc = elem.Location;
@@ -282,7 +277,7 @@ namespace HelloWorld.ElementFuncNamespace
         }
 
         // show the geometry information of the given element.
-        public void ShowGeometry(Autodesk.Revit.ApplicationServices.Application m_rvtApp, Element elem)
+        public static void ShowGeometry(Autodesk.Revit.ApplicationServices.Application m_rvtApp, Element elem)
         {
             // Set a geometry option 
             Options opt = m_rvtApp.Create.NewGeometryOptions();

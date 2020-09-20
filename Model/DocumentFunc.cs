@@ -1,63 +1,60 @@
-﻿using Autodesk.Revit.ApplicationServices;
-using Autodesk.Revit.Attributes;
-using Autodesk.Revit.DB;
-using Autodesk.Revit.DB.Events;
-using Autodesk.Revit.UI;
-using Autodesk.Revit.UI.Selection;
-using System.Collections;
+﻿using Autodesk.Revit.DB;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using Application = Autodesk.Revit.ApplicationServices.Application;
 using System;
 
-namespace HelloWorld.DocumentFuncNamespace
+namespace HelloWorld.Model
 {
-    public class DocumentFunc
+    public static class DocumentFunc
     {
-        public Action<string, string> userMessagefunc { get; set; }
+        public static Action<string> userMessagefunc { get; set; }
 
-        public void CreateNewProjectByTemplate(Application app, FileInfo templateFile, FileInfo projectFile)
+        public static void CreateNewProjectByTemplate(Application app, FileInfo templateFile, FileInfo projectFile)
         {
-            if (!templateFile.Exists) userMessagefunc("CreateNewProjectByTemplate ", templateFile.FullName + " does not exist in directory");
-            else if (!projectFile.Directory.Exists) userMessagefunc("CreateNewProjectByTemplate ", projectFile.DirectoryName + " does not exist");
-            else if (projectFile.Exists) userMessagefunc("CreateNewProjectByTemplate", $"{projectFile.Name} can not be created because it already exist in directory {projectFile.DirectoryName}");
+            if (!templateFile.Exists) 
+                userMessagefunc(templateFile.FullName + " does not exist in directory");
+            else if (!projectFile.Directory.Exists) 
+                userMessagefunc(projectFile.DirectoryName + " does not exist");
+            else if 
+                (projectFile.Exists) userMessagefunc($"{projectFile.Name} can not be created because it already exist in directory {projectFile.DirectoryName}");
             else
             {
                 Document doc = null;
                 doc = app.NewProjectDocument(templateFile.FullName);
                 doc.SaveAs(projectFile.FullName);
                 doc.Close();
-                if (projectFile.Exists && userMessagefunc != null) userMessagefunc("CreateNewProjectByTemplate", projectFile.Name + " is succesfully created");
+                if (projectFile.Exists && userMessagefunc != null) userMessagefunc(projectFile.Name + " is succesfully created");
             }
         }
 
-        public void CreateRevitLink(Document doc, string linkPathName, bool getCoordDoc = false)
+        public static void CreateRevitLink(Document doc, string linkPathName, bool getCoordDoc = false)
         {
             //TODO: If link exist, show massage for user and skip command
             //TODO: Learn try-catch-finaly and use in code
             //TODO: If link has the same name as project file, show message and skip command
-            // Create new revit link storing absolute path to a file
-            RevitLinkInstance instance;
 
-            Transaction transaction = new Transaction(doc);
-            transaction.Start("Link files");
-            ModelPath linkpath = ModelPathUtils.ConvertUserVisiblePathToModelPath(linkPathName);
-            RevitLinkOptions options = new RevitLinkOptions(false);
-            LinkLoadResult result = RevitLinkType.Create(doc, linkpath, options);
-            //MessageBox.Show("Link ID " + result.ElementId.IntegerValue);
-            instance = RevitLinkInstance.Create(doc, result.ElementId);
-            //TODO: Test get coord from AR file
-            if (getCoordDoc) doc.AcquireCoordinates(instance.Id);
-            else
-                instance.MoveBasePointToHostBasePoint(false);
-            transaction.Commit();
+            // Create new revit link storing absolute path to a file
+            using (Transaction transaction = new Transaction(doc))
+            {
+                transaction.Start("Link files");
+                ModelPath linkpath = ModelPathUtils.ConvertUserVisiblePathToModelPath(linkPathName);
+                RevitLinkOptions options = new RevitLinkOptions(false);
+                LinkLoadResult result = RevitLinkType.Create(doc, linkpath, options);
+                //MessageBox.Show("Link ID " + result.ElementId.IntegerValue);
+                RevitLinkInstance instance = RevitLinkInstance.Create(doc, result.ElementId);
+                //TODO: Test get coord from AR file
+                if (getCoordDoc)
+                    doc.AcquireCoordinates(instance.Id);
+                else
+                    instance.MoveBasePointToHostBasePoint(false);
+                transaction.Commit();
+            }
             doc.Save();
             doc.Close();
         }
 
-        public void EnableWorksharing(Document doc, string gridWorksetName, string levelWorksetName)
+        public static void EnableWorksharing(Document doc, string gridWorksetName, string levelWorksetName)
         {
             if (!doc.IsWorkshared)
             {
@@ -69,16 +66,16 @@ namespace HelloWorld.DocumentFuncNamespace
                 options.SetWorksharingOptions(wsOptions);
                 options.OverwriteExistingFile = true;
                 doc.SaveAs(doc.PathName, options);
+                //TODO Synchronize file. Worksets are busy!!!
                 doc.Close();
             }
-            else userMessagefunc("EnableWorksharing", "Worksharing is already enable in this file");
+            else userMessagefunc("Worksharing is already enable in this file");
         }
 
-        public void CreateWorksets(Document doc, string[] WorksetNameArray)
+        public static void CreateWorksets(Document doc, string[] WorksetNameArray)
         {
             Workset newWorkset = null;
             // Worksets can only be created in a document with worksharing enabled
-
             string worksetName = "New Workset";
             // Workset name must not be in use by another workset
             for (int i = 0; i < WorksetNameArray.Length; i++)
@@ -94,14 +91,14 @@ namespace HelloWorld.DocumentFuncNamespace
                 }
                 else
                 {
-                    userMessagefunc("CreateWorksets", $"Workset name {worksetName} is not unique");
+                    userMessagefunc($"Workset name {worksetName} is not unique");
                 }
             }
             doc.Save();
             doc.Close();
         }
 
-        public Document OpenNewLocalFromModelPath(Application app, ModelPath centralPath, ModelPath localPath)
+        public static Document OpenNewLocalFromModelPath(Application app, ModelPath centralPath, ModelPath localPath)
         {
             // Create the new local at the given path
             WorksharingUtils.CreateNewLocal(centralPath, localPath);

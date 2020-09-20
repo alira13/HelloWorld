@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Xaml;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Media.Imaging;
-using System.Windows.Forms;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using ComboBox = Autodesk.Revit.UI.ComboBox;
 
 
+namespace HelloWorld.View
+{
     [Transaction(TransactionMode.Manual)]
     [Regeneration(RegenerationOption.Manual)]
 
@@ -24,26 +22,26 @@ using ComboBox = Autodesk.Revit.UI.ComboBox;
         }
     }
 
-    public class HelloWorldApp : IExternalApplication
+    public class UIRibbon : IExternalApplication
     {
         /// <summary>
         /// This is both the assembly name and the namespace 
         /// of the external command provider.
         /// </summary>
-        const string _introLabName = "HelloWorld";
-        const string _dllExtension = ".dll";
+        const string IntroLabName = "HelloWorld";
+        const string DllExtension = ".dll";
         /// <summary>
         /// Name of subdirectory containing images.
         /// </summary>
-        const string _imageFolderName = "Images";
+        const string ImageFolderName = "Images";
         /// <summary>
         /// Location of managed dll where we have defined the commands.
         /// </summary>
-        string _introLabPath;
+        string introLabPath;
         /// <summary>
         /// Location of images for icons.
         /// </summary>
-        string _imageFolder;
+        string imageFolder;
 
 
         /// <summary>
@@ -76,14 +74,14 @@ using ComboBox = Autodesk.Revit.UI.ComboBox;
         /// </summary>
         BitmapImage NewBitmapImage(string imageName)
         {
-            return new BitmapImage(new Uri(Path.Combine(_imageFolder, imageName)));
+            return new BitmapImage(new Uri(Path.Combine(imageFolder, imageName)));
         }
 
 
         public void AddPushButtons(RibbonPanel panel)
         {
             // Set the information about the command we will be assigning to the button 
-            PushButtonData pushButtonDataCreateFiles = new PushButtonData("CreateFiles", "Создать файлы", _introLabPath, "CreatePrjFilesCom");
+            PushButtonData pushButtonDataCreateFiles = new PushButtonData("CreateFiles", "Создать файлы", introLabPath, "CreatePrjFilesCom");
             // Add a button to the panel 
             PushButton pushButtonCreateFiles = panel.AddItem(pushButtonDataCreateFiles) as PushButton;
             // Add an icon 
@@ -94,7 +92,7 @@ using ComboBox = Autodesk.Revit.UI.ComboBox;
             pushButtonCreateFiles.AvailabilityClassName = "ButtonAvailability";
 
             // Set the information about the command we will be assigning to the button 
-            PushButtonData pushButtonDataInsertLink = new PushButtonData("InsertLInk", "Вставить связь", _introLabPath, "InsertRvtLinksCom");
+            PushButtonData pushButtonDataInsertLink = new PushButtonData("InsertLink", "Вставить связь", introLabPath, "InsertRvtLinksCom");
             // Add a button to the panel 
             PushButton pushButtonInsertLink = panel.AddItem(pushButtonDataInsertLink) as PushButton;
             // Add an icon 
@@ -103,6 +101,19 @@ using ComboBox = Autodesk.Revit.UI.ComboBox;
             pushButtonInsertLink.ToolTip = "Вставка связи по общим координатам";
             //make button available for application mode 
             pushButtonInsertLink.AvailabilityClassName = "ButtonAvailability";
+
+            /*
+            // Set the information about the command we will be assigning to the button 
+            PushButtonData pushButtonDataCreateWorksets = new PushButtonData("CreateWorksets", "Создать рабочие наборы", introLabPath, "CreateWorksetsCom");
+            // Add a button to the panel 
+            PushButton pushButtonCreateWorksets = panel.AddItem(pushButtonDataCreateWorksets) as PushButton;
+            // Add an icon 
+            pushButtonCreateWorksets.LargeImage = NewBitmapImage("ImgHelloWorld.png");
+            // Add a tooltip for ex comment to command
+            pushButtonCreateWorksets.ToolTip = "Создание рабочих наборов";
+            //make button available for application mode 
+            pushButtonCreateWorksets.AvailabilityClassName = "ButtonAvailability";
+            */
         }
 
 
@@ -111,17 +122,17 @@ using ComboBox = Autodesk.Revit.UI.ComboBox;
             // Create three push buttons for split button drop down 
 
             // #1 
-            PushButtonData pushButtonData1 = new PushButtonData("SplitCommandData", "Command Data", _introLabPath, "HelloWorldCom");
+            PushButtonData pushButtonData1 = new PushButtonData("SplitCommandData", "Command Data", introLabPath, "HelloWorldCom");
             pushButtonData1.LargeImage = NewBitmapImage("ImgHelloWorld.png");
             pushButtonData1.AvailabilityClassName = "ButtonAvailability";
 
             // #2 
-            PushButtonData pushButtonData2 = new PushButtonData("SplitDbElement", "DB Element", _introLabPath, "HelloWorldCom");
+            PushButtonData pushButtonData2 = new PushButtonData("SplitDbElement", "DB Element", introLabPath, "HelloWorldCom");
             pushButtonData2.LargeImage = NewBitmapImage("ImgHelloWorld.png");
             pushButtonData2.AvailabilityClassName = "ButtonAvailability";
 
             // #3 
-            PushButtonData pushButtonData3 = new PushButtonData("SplitElementFiltering", "ElementFiltering", _introLabPath, "HelloWorldCom");
+            PushButtonData pushButtonData3 = new PushButtonData("SplitElementFiltering", "ElementFiltering", introLabPath, "HelloWorldCom");
             pushButtonData3.LargeImage = NewBitmapImage("ImgHelloWorld.png");
             pushButtonData3.AvailabilityClassName = "ButtonAvailability";
 
@@ -191,7 +202,7 @@ using ComboBox = Autodesk.Revit.UI.ComboBox;
         public void AddRibbonSampler(UIControlledApplication app)
         {
             app.CreateRibbonTab("DoMagic");
-            RibbonPanel panel = app.CreateRibbonPanel("DoMagic", "Создание модели");
+            RibbonPanel panel = app.CreateRibbonPanel("DoMagic", "Создание файлов модели");
             AddPushButtons(panel);
             //AddSplitButton(panel);
             //AddComboBox(panel);
@@ -204,20 +215,20 @@ using ComboBox = Autodesk.Revit.UI.ComboBox;
             string dir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
             // External command path:
-            _introLabPath = Path.Combine(dir, _introLabName + _dllExtension);
+            introLabPath = Path.Combine(dir, IntroLabName + DllExtension);
 
-            if (!File.Exists(_introLabPath))
+            if (!File.Exists(introLabPath))
             {
-                TaskDialog.Show("UIRibbon", "External command assembly not found: " + _introLabPath);
+                TaskDialog.Show("UIRibbon", "External command assembly not found: " + introLabPath);
                 return Result.Failed;
             }
 
             // Image path:
-            _imageFolder = FindFolderInParents(dir, _imageFolderName);
+            imageFolder = FindFolderInParents(dir, ImageFolderName);
 
-            if (null == _imageFolder || !Directory.Exists(_imageFolder))
+            if (null == imageFolder || !Directory.Exists(imageFolder))
             {
-                TaskDialog.Show("UIRibbon", string.Format("No image folder named '{0}' found in the parent directories of '{1}.", _imageFolderName, dir));
+                TaskDialog.Show("UIRibbon", string.Format("No image folder named '{0}' found in the parent directories of '{1}.", ImageFolderName, dir));
                 return Result.Failed;
             }
 
@@ -231,3 +242,4 @@ using ComboBox = Autodesk.Revit.UI.ComboBox;
             return Result.Succeeded;
         }
     }
+}
