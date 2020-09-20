@@ -4,10 +4,33 @@ using Autodesk.Revit.UI.Selection;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
+#region This code is not used. Maybe it will be required for future development
+/*
+
 namespace HelloWorld.Model
 {
     public static class ElementFunc
     {
+        public static void FilterSystemFamByType(Document m_rvtDoc)
+        {
+            var wallTypeCollector1 = new FilteredElementCollector(m_rvtDoc).WherePasses(new ElementClassFilter(typeof(WallType)));
+            IList<Element> wallTypes1 = wallTypeCollector1.ToElements();
+        }
+
+        //Filter System Family Types by Class
+        public static void FilterSystemFamByClass(Document m_rvtDoc)
+        {
+            FilteredElementCollector wallTypeCollector3 = new FilteredElementCollector(m_rvtDoc).OfClass(typeof(WallType));
+        }
+
+        public static void FilterLoadedFamByCat(Document m_rvtDoc)
+        {
+            var doorTypeCollector = new FilteredElementCollector(m_rvtDoc);
+            doorTypeCollector.OfClass(typeof(FamilySymbol));
+            doorTypeCollector.OfCategory(BuiltInCategory.OST_Doors);
+            IList<Element> doorTypes = doorTypeCollector.ToElements();
+        }
+
         // Helper Function: parse the geometry element by geometry type. Here we look at the top level. 
         public static string GeometryElementToString(GeometryElement geomElem)
         {
@@ -295,3 +318,5 @@ namespace HelloWorld.Model
         }
     }
 }
+*/
+#endregion
