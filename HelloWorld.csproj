@@ -60,9 +60,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\FileManager.cs" />
+    <Compile Include="Model\CreateProjectFileInfo.cs" />
     <Compile Include="Model\ExcelFunc.cs" />
     <Compile Include="CreateWorksetsCom.cs" />
+    <Compile Include="Presenter\CreateProjectFilesPresenter.cs" />
     <Compile Include="View\UserMessageFunc.cs" />
     <Compile Include="View\OpenConfigFileForm.cs">
       <SubType>Form</SubType>
@@ -90,7 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
-    <Folder Include="Presenter\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.MD" />
